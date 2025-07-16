@@ -105,12 +105,40 @@ BoxLayout:
                                 size_hint_y: None
                                 height: '100dp'  # 固定高度
                                 background_color: [0.6, 0.6, 0.6, 1]
-                            Button:
-                                text: '区域 5'
-                                font_name: "fonts/pingfang-hei.ttf"
+                            # 主内容区域
+                            BoxLayout:
+                                orientation: 'horizontal'
                                 size_hint_y: None
-                                height: '100dp'  # 固定高度
-                                background_color: [0.5, 0.5, 0.5, 1]
+                                height: '100dp' 
+                                
+                                # 左侧区域
+                                BoxLayout:
+                                    size_hint_x: 0.3
+                                    Button:
+                                        text: '左侧区域'
+                                        font_name: "fonts/pingfang-hei.ttf"
+                                        size_hint_y: 1
+                                        
+                                # 右侧区域
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    size_hint_x: 0.7
+                                    
+                                    # 上侧区域
+                                    BoxLayout:
+                                        size_hint_y: 0.7
+                                        Button:
+                                            text: '右上区域'
+                                            font_name: "fonts/pingfang-hei.ttf"
+                                            size_hint: 1, 1
+                                            
+                                    # 下侧区域
+                                    BoxLayout:
+                                        size_hint_y: 0.3
+                                        Button:
+                                            text: '右下区域'
+                                            font_name: "fonts/pingfang-hei.ttf"
+                                            size_hint: 1, 1
         
         # 第二个标签页
         MDBottomNavigationItem:
