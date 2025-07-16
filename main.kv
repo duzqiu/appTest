@@ -8,7 +8,8 @@ BoxLayout:
         MDBottomNavigationItem:
             name: 'screen1'
             text: 'Home'
-            icon: 'home'   
+            icon: 'home'  
+            md_bg_color: [0.8, 0.8, 0.8, 1]  # 灰色背景 
             BoxLayout:
                 orientation: "vertical"
 
@@ -144,7 +145,8 @@ BoxLayout:
         MDBottomNavigationItem:
             name: 'screen2'
             text: 'Search'
-            icon: 'magnify'   
+            icon: 'magnify'  
+            md_bg_color: [0.8, 0.8, 0.8, 1]  # 灰色背景 
             MDLabel:
                 text: '这里是搜索页面'
                 font_name: "fonts/pingfang-hei.ttf"
@@ -152,10 +154,208 @@ BoxLayout:
         
         # 第三个标签页
         MDBottomNavigationItem:
+            orientation: 'vertical'
             name: 'screen3'
             text: 'Settings'
-            icon: 'cog'           
-            MDLabel:
-                text: '这里是设置页面'
-                font_name: "fonts/pingfang-hei.ttf"
-                halign: 'center'
+            icon: 'cog'
+            # 自定义Canvas来添加背景图片
+            canvas.before:
+                Rectangle:
+                    source: 'image/bgimage.jpg'  # 替换为你的图片路径
+                    size: self.size
+                    pos: self.pos
+
+            # ↓↓↓ 可滑动的内容区域 ↓↓↓
+            ScrollView:
+                size_hint: 1, 1
+                pos_hint: {"center_x": 0.5, "center_y": 0.45}  # 居中偏下一点
+                do_scroll_x: False
+                bar_width: 1
+                scroll_type: ['bars', 'content']
+
+                GridLayout:
+                    cols: 1
+                    spacing: dp(4)
+                    size_hint_y: None
+                    height: self.minimum_height
+
+                    # ↓↓↓ 示例模块1 ↓↓↓
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(180)
+                        md_bg_color: [1, 1, 1, 1]
+                        radius: [16, ]
+                        padding: [16, 12]
+                        elevation: 2
+
+                        Label:
+                            text: "这是一个圆角模块1"
+                            font_name: "fonts/pingfang-hei.ttf"
+                            color: [0, 0, 0, 1]
+                            halign: "left"
+                            valign: "middle"
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+
+                    # ↓↓↓ 示例模块2 ↓↓↓
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(60)
+                        md_bg_color: [1, 1, 1, 1]
+                        radius: [16, ]
+                        padding: [16, 12]
+                        elevation: 2
+                        spacing: "10dp"  # 板块之间间距
+
+                        # 四个板块，每个板块占 0.25 宽度
+                        MDBoxLayout:
+                            size_hint_x: 0.25
+                            md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                            radius: [12, ]  # 圆角
+                            padding: [10]
+                            Label:
+                                text: "1"
+                                color: [0, 0, 0, 1]
+                                halign: "center"
+                                valign: "middle"
+
+                        MDBoxLayout:
+                            size_hint_x: 0.25
+                            md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                            radius: [12, ]
+                            padding: [10]
+                            Label:
+                                text: "2"
+                                color: [0, 0, 0, 1]
+                                halign: "center"
+                                valign: "middle"
+
+                        MDBoxLayout:
+                            size_hint_x: 0.25
+                            md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                            radius: [12, ]
+                            padding: [10]
+                            Label:
+                                text: "3"
+                                color: [0, 0, 0, 1]
+                                halign: "center"
+                                valign: "middle"
+
+                        MDBoxLayout:
+                            size_hint_x: 0.25
+                            md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                            radius: [12, ]
+                            padding: [10]
+                            Label:
+                                text: "4"
+                                color: [0, 0, 0, 1]
+                                halign: "center"
+                                valign: "middle"
+
+                    # ↓↓↓ 示例模块3（可以继续复制更多） ↓↓↓
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(80)
+                        md_bg_color: [1, 1, 1, 1]
+                        radius: [16, ]
+                        padding: [16, 12]
+                        elevation: 2
+
+                        Label:
+                            text: "这是一个圆角模块3"
+                            font_name: "fonts/pingfang-hei.ttf"
+                            color: [0, 0, 0, 1]
+                            halign: "left"
+                            valign: "middle"
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                    # ↓↓↓ 示例模块3（可以继续复制更多） ↓↓↓
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(120)
+                        md_bg_color: [1, 1, 1, 1]
+                        radius: [16, ]
+                        padding: [16, 12]
+                        elevation: 2
+
+                        Label:
+                            text: "这是一个圆角模块4"
+                            font_name: "fonts/pingfang-hei.ttf"
+                            color: [0, 0, 0, 1]
+                            halign: "left"
+                            valign: "middle"
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                    # ↓↓↓ 示例模块3（可以继续复制更多） ↓↓↓
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(180)
+                        md_bg_color: [1, 1, 1, 1]
+                        radius: [16, ]
+                        padding: [16, 12]
+                        elevation: 2
+
+                        Label:
+                            text: "这是一个圆角模块5"
+                            font_name: "fonts/pingfang-hei.ttf"
+                            color: [0, 0, 0, 1]
+                            halign: "left"
+                            valign: "middle"
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                    # ↓↓↓ 示例模块3（可以继续复制更多） ↓↓↓
+                    MDBoxLayout:
+                        size_hint_y: None
+                        height: dp(80)
+                        md_bg_color: [1, 1, 1, 1]
+                        radius: [16, ]
+                        padding: [16, 12]
+                        elevation: 2
+
+                        Label:
+                            text: "这是一个圆角模块6"
+                            font_name: "fonts/pingfang-hei.ttf"
+                            color: [0, 0, 0, 1]
+                            halign: "left"
+                            valign: "middle"
+                            text_size: self.width, None
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            
+            # 右上角图标按钮组 - 使用 AnchorLayout 实现右对齐
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'top'
+                padding: [0, 0, 40, 0]  # 右侧留出16dp边距
+
+                BoxLayout:
+                    size_hint: None, None
+                    width: "130dp"       # 总宽度根据图标+间距计算
+                    height: "38dp"
+                    spacing: "1dp"       # 图标之间间距更小
+
+                    MDIconButton:
+                        icon: "qrcode-scan"
+                        on_press: app.on_scan()
+                        user_font_size: "18sp"
+                        theme_text_color: "Custom"
+                        text_color: [0, 0, 0, 1]
+
+                    MDIconButton:
+                        icon: "headset"
+                        on_press: app.on_service()
+                        user_font_size: "18sp"
+                        theme_text_color: "Custom"
+                        text_color: [0, 0, 0, 1]
+
+                    MDIconButton:
+                        icon: "cog"
+                        on_press: app.on_settings()
+                        user_font_size: "18sp"
+                        theme_text_color: "Custom"
+                        text_color: [0, 0, 0, 1]

@@ -21,6 +21,14 @@ class MainApp(MDApp):
                         fit_mode="fill")  # 中心定位)
             swiper_item.add_widget(img)
             self.root.ids.swiper.add_widget(swiper_item)
+    def on_scan(self):
+        print("点击了：扫一扫")
+
+    def on_service(self):
+        print("点击了：客服")
+
+    def on_settings(self):
+        print("点击了：设置")
     
 if __name__ == '__main__':
     MainApp().run()
