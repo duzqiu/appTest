@@ -3,12 +3,20 @@ from kivy.lang import Builder
 from kivy.uix.image import Image
 from kivymd.uix.swiper import MDSwiper, MDSwiperItem
 from kivy.core.window import Window
+from kivy.uix.screenmanager import Screen
 
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 
 Window.size = (375, 667)
 
+class GridItem(MDBoxLayout):
+    pass
+
+class DataCard(Screen):
+    icon_source = StringProperty("")   # 图标路径
+    item_name = StringProperty("")     # 名称
+    rating = NumericProperty(0)        # 评分（数字）
 
 class MenuItem(MDBoxLayout):
     icon = StringProperty("")

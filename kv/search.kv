@@ -1,8 +1,63 @@
+<DataCard>:
+    orientation: 'horizontal'
+    padding: [10, 10]
+    spacing: "10dp"
+    md_bg_color: [0.95, 0.95, 0.95, 1]  # 浅灰色背景
+    size_hint_y: None
+    height: "50dp"  # 固定高度以确保一致的外观
+    radius: [16, ]
+
+    FitImage:
+        source: root.icon_source if root.icon_source else 'image/icon.png'  # 设置默认图标
+        size_hint: None, None
+        size: "32dp", "32dp"
+        pos_hint: {"center_y": 0.5, "center_x":0.2}
+
+    MDBoxLayout:
+        orientation: 'vertical'   
+        padding: [10]
+
+        MDLabel:
+            text: root.item_name
+            font_name: "fonts/pingfang-hei.ttf"
+            halign: 'center'
+
+        MDLabel:
+            text: f"{root.rating}/5.0"
+            theme_text_color: 'Secondary'
+            halign: 'center'
+# 👇 自定义组件：图标 + 文字组合
+<GridItem@MDBoxLayout>:
+    icon: ""
+    text: ""
+    orientation: "horizontal"
+    spacing: "12dp"
+    padding: "12dp"
+    size_hint_x: None
+    width: "75dp"
+    md_bg_color: [0.9, 0.9, 0.9, 0.3]  # 灰色背景，不透明
+    radius: [12, ]
+
+    MDIcon:
+        icon: root.icon
+        halign: "right"
+        size_hint: None, None
+        font_size: "14dp"
+        pos_hint: {"center_y": 0.5}
+
+    MDLabel:
+        text: root.text
+        font_name: "fonts/pingfang-hei.ttf"
+        halign: "center"
+        theme_text_color: "Secondary"
+        pos_hint: {"center_y": 0.5}
+
 # 第二个标签页
 <SearchPage@MDBottomNavigationItem>:
     name: 'screen2'
     text: 'Search'
-    icon: 'magnify'  
+    icon: 'magnify' 
+    # 搜索框+搜索按钮 
     MDBoxLayout:
         id: top_bar
         size_hint: (0.95, None)
@@ -33,38 +88,114 @@
     ScrollView:
         pos_hint: {"top": 0.9}  # 留出顶部空间
         size_hint: 1, 0.9
-
         GridLayout:
             cols: 1
             spacing: "6dp"
             size_hint_y: None
             height: self.minimum_height
-
-            # 示例内容模块
+            # 示例内容模块1
             MDBoxLayout:
+                orientation: 'vertical'
                 size_hint_y: None
-                height: "200dp"
+                height: "260dp"
                 md_bg_color: [1, 1, 1, 1]
                 radius: [16, ]
                 padding: [16, 12]
-
-                Label:
-                    text: "这是一个滚动区域的内容1"
+                MDLabel:
+                    text: "热门推荐"
                     font_name: "fonts/pingfang-hei.ttf"
-                    color: [0, 0, 0, 1]
-            # 示例内容模块
+                    halign: "left"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: "24dp"
+                    valign: "middle"
+                    padding_x: "24dp"
+
+                MDGridLayout:
+                    cols: 2  # 双列
+                    rows: 4  # 四行
+                    padding: [10, 10]
+                    spacing: [10, 10]
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "XM"
+                        rating: 1.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "TMCM"
+                        rating: 4.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "嘉盛"
+                        rating: 3.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "富拓"
+                        rating: 2.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "Exness"
+                        rating: 1.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "爱华"
+                        rating: 3.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "易汇"
+                        rating: 2.0
+
+                    DataCard:
+                        icon_source: 'image/icon.png'
+                        item_name: "HTFX"
+                        rating: 5.0
+            # 示例内容模块2
             MDBoxLayout:
+                orientation: 'vertical'  
                 size_hint_y: None
                 height: "60dp"
                 md_bg_color: [1, 1, 1, 1]
                 radius: [16, ]
-                padding: [16, 12]
 
-                Label:
-                    text: "这是一个滚动区域的内容2"
+                MDLabel:
+                    text: "搜索发现"
                     font_name: "fonts/pingfang-hei.ttf"
-                    color: [0, 0, 0, 1]
-            # 示例内容模块
+                    halign: "left"
+                    theme_text_color: "Primary"
+                    size_hint_y: None
+                    height: "24dp"
+                    valign: "center"
+                    padding_x: "24dp"
+                MDGridLayout:
+                    cols: 4
+                    spacing: "10dp"
+                    padding: ["16dp", "8dp", "16dp", "10dp"]
+                    size_hint_y: None
+                    height: "20dp"  # 可根据内容调整高度
+                    row_default_height: "20dp"
+                    row_force_default: True
+
+                    # 👇 四个网格项
+                    GridItem:
+                        icon: "image/icon.png"
+                        text: "首页"
+                    GridItem:
+                        icon: "image/icon.png"
+                        text: "我的"
+                    GridItem:
+                        icon: "image/icon.png"
+                        text: "设置"
+                    GridItem:
+                        icon: "image/icon.png"
+                        text: "帮助"
+            # 示例内容模块3
             MDBoxLayout:
                 size_hint_y: None
                 height: "120dp"
@@ -76,7 +207,7 @@
                     text: "这是一个滚动区域的内容3"
                     font_name: "fonts/pingfang-hei.ttf"
                     color: [0, 0, 0, 1]
-            # 示例内容模块
+            # 示例内容模块4
             MDBoxLayout:
                 size_hint_y: None
                 height: "120dp"
