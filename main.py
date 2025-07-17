@@ -3,12 +3,12 @@ from kivy.lang import Builder
 from kivy.uix.image import Image
 from kivymd.uix.swiper import MDSwiper, MDSwiperItem
 from kivy.core.window import Window
-from kivy.clock import Clock
 
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.properties import StringProperty
 
 Window.size = (375, 667)
+
 
 class MenuItem(MDBoxLayout):
     icon = StringProperty("")
@@ -19,6 +19,7 @@ class MenuItem(MDBoxLayout):
             print(f"点击了：{self.text}")
             return True
         return super().on_touch_down(touch)
+
 
 class MyGridItem(MDBoxLayout):
     icon = StringProperty("")
@@ -55,12 +56,13 @@ class MainApp(MDApp):
 
     def on_search(self):
         # 获取输入内容
-        input_text = self.root.ids.search_input.text.strip()
+        input_text = self.root.ids.search.ids.search_input.text.strip()
         print("用户输入了：", input_text)
         # 可以在这里触发搜索逻辑
     def on_login_label_click(self):
         print("点击了登录/注册")
         # 打开登录页面或弹出对话框
-
+    def show_toast(self, msg):
+        print(msg)
 if __name__ == '__main__':
     MainApp().run()
