@@ -1,0 +1,339 @@
+#:import colors kivymd.color_definitions.colors
+<MenuItem@MDBoxLayout>:
+    icon: ""
+    text: ""
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: "48dp"
+    spacing: "12dp"
+    padding: [0, 4]
+
+    # 左侧图标 + 文字容器
+    MDBoxLayout:
+        orientation: 'horizontal'
+        spacing: "12dp"
+        size_hint_x: 0.9
+
+        MDIconButton:
+            icon: root.icon
+            theme_text_color: "Custom"
+            text_color: [0, 0, 0, 0.6]
+            user_font_size: "20sp"
+            size_hint: None, None
+            width: "24dp"
+            height: "24dp"
+            pos_hint: {"center_y": 0.5}
+
+        MDLabel:
+            text: root.text
+            font_name: "fonts/pingfang-hei.ttf"
+            font_style: "Body1"
+            theme_text_color: "Primary"
+            valign: "center"
+            halign: "left"
+
+    # 右侧箭头图标
+    MDIconButton:
+        icon: "chevron-right"
+        theme_text_color: "Secondary"
+        user_font_size: "20sp"
+        size_hint: None, None
+        width: "24dp"
+        height: "24dp"
+        pos_hint: {"center_y": 0.5}
+<MyGridItem@MDBoxLayout>:
+    icon: ""
+    text: ""
+    orientation: 'vertical'
+    spacing: "5dp"
+    padding: [0, 5]
+    size_hint_x: 1
+    size_hint_y: 0.9
+    height: "60dp"
+    md_bg_color: [0.95, 0.95, 0.95, 0.2]
+    radius: [10]
+
+    MDIconButton:
+        icon: root.icon
+        ripple_scale:0
+        theme_text_color: "Primary"
+        font_size: "24sp"
+        pos_hint: {"center_x": 0.5, "center_y": 0.3}
+
+    MDLabel:
+        text: root.text
+        font_name: "fonts/pingfang-hei.ttf"
+        theme_text_color: "Secondary"
+        halign: "center"
+
+# 第三个标签页
+<SettingsPage@MDBottomNavigationItem>:
+    orientation: 'vertical'
+    name: 'screen3'
+    text: 'Settings'
+    icon: 'cog'
+    # 自定义Canvas来添加背景图片
+    canvas.before:
+        Rectangle:
+            source: 'image/bgimage.jpg'  # 替换为你的图片路径
+            size: self.size
+            pos: self.pos
+
+    # ↓↓↓ 可滑动的内容区域 ↓↓↓
+    ScrollView:
+        size_hint: 1, 1
+        pos_hint: {"center_x": 0.5, "center_y": 0.45}  # 居中偏下一点
+        do_scroll_x: False
+        bar_width: 1
+        scroll_type: ['bars', 'content']
+
+        GridLayout:
+            cols: 1
+            spacing: dp(4)
+            size_hint_y: None
+            height: self.minimum_height
+
+            # ↓↓↓ 示例模块1 ↓↓↓
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(60)
+                md_bg_color: [1, 1, 1, 1]
+                radius: [16, ]
+                padding: [16, 12]
+                elevation: 2
+
+                MDIconButton:
+                    icon: "account-circle"
+                    ripple_scale:0
+                    theme_text_color: "Primary"
+                    text_color: [0, 0, 0, 0.8]
+                    user_font_size: "12sp"  # 设置图标大小
+                    pos_hint: {"center_y": 0.5}
+                    on_press: app.on_login_label_click()
+
+                MDLabel:
+                    text: "登录/注册"
+                    font_name: "fonts/pingfang-hei.ttf"
+                    theme_text_color: "Primary"
+                    valign: "middle"
+                    halign: "left"
+
+            # ↓↓↓ 示例模块2 ↓↓↓
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: dp(60)
+                md_bg_color: [1, 1, 1, 1]
+                radius: [16, ]
+                padding: [16, 12]
+                elevation: 2
+                spacing: "10dp"  # 板块之间间距
+
+                # 四个板块，每个板块占 0.25 宽度
+                MDBoxLayout:
+                    size_hint_x: 0.25
+                    md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                    radius: [12, ]  # 圆角
+                    padding: [10]
+                    Label:
+                        text: "1"
+                        color: [0, 0, 0, 1]
+                        halign: "center"
+                        valign: "middle"
+
+                MDBoxLayout:
+                    size_hint_x: 0.25
+                    md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                    radius: [12, ]
+                    padding: [10]
+                    Label:
+                        text: "2"
+                        color: [0, 0, 0, 1]
+                        halign: "center"
+                        valign: "middle"
+
+                MDBoxLayout:
+                    size_hint_x: 0.25
+                    md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                    radius: [12, ]
+                    padding: [10]
+                    Label:
+                        text: "3"
+                        color: [0, 0, 0, 1]
+                        halign: "center"
+                        valign: "middle"
+
+                MDBoxLayout:
+                    size_hint_x: 0.25
+                    md_bg_color: [0.9, 0.9, 0.9, 1]  # 灰色背景
+                    radius: [12, ]
+                    padding: [10]
+                    Label:
+                        text: "4"
+                        color: [0, 0, 0, 1]
+                        halign: "center"
+                        valign: "middle"
+
+            # ↓↓↓ 示例模块3（可以继续复制更多） ↓↓↓
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(80)
+                md_bg_color: [1, 1, 1, 1]
+                radius: [16, ]
+                padding: [16, 12]
+                elevation: 2
+
+                Label:
+                    text: "这是一个圆角模块3"
+                    font_name: "fonts/pingfang-hei.ttf"
+                    color: [0, 0, 0, 1]
+                    halign: "left"
+                    valign: "middle"
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+            # ↓↓↓ 示例模块4（可以继续复制更多） ↓↓↓
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(160)
+                md_bg_color: [1, 1, 1, 1]
+                radius: [16, ]
+                padding: [16, 12]
+                elevation: 2
+                # 第一行
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    spacing: "20dp"
+                    size_hint_y: None
+                    height: "80dp"
+                    # 板块1
+                    MyGridItem:
+                        icon: "home"
+                        text: "首页"
+                    # 板块2
+                    MyGridItem:
+                        icon: "account"
+                        text: "我的"
+                    # 板块3
+                    MyGridItem:
+                        icon: "apps"
+                        text: "应用"
+                    # 板块4
+                    MyGridItem:
+                        icon: "help-circle"
+                        text: "帮助"
+
+                # 第二行
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    spacing: "20dp"
+                    size_hint_y: None
+                    height: "80dp"
+                    # 板块5
+                    MyGridItem:
+                        icon: "download"
+                        text: "下载"
+                    # 板块6
+                    MyGridItem:
+                        icon: "camera"
+                        text: "拍照"
+                    # 板块7
+                    MyGridItem:
+                        icon: "music"
+                        text: "音乐"
+                    # 板块8
+                    MyGridItem:
+                        icon: "book"
+                        text: "阅读"
+            # ↓↓↓ 示例模块5（可以继续复制更多） ↓↓↓
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(180)
+                md_bg_color: [1, 1, 1, 1]
+                radius: [16, ]
+                padding: [16, 12]
+                elevation: 2
+                # 标题行（可选）
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: "40dp"
+                    padding: [30, 12]
+                    MDLabel:
+                        text: "这是一个标题"
+                        font_name: "fonts/pingfang-hei.ttf"
+                        theme_text_color: "Primary"
+                        valign: "center"
+                        halign: "left"
+                        size_hint_x: 0.8
+
+                # 内容行 1
+                MenuItem:
+                    icon: "home"
+                    text: "首页"
+
+                # 内容行 2
+                MenuItem:
+                    icon: "account"
+                    text: "我的账户"
+
+                # 内容行 3
+                MenuItem:
+                    icon: "bug"
+                    text: "缺陷"
+    
+            # ↓↓↓ 示例模块6（可以继续复制更多） ↓↓↓
+            MDBoxLayout:
+                size_hint_y: None
+                height: dp(80)
+                md_bg_color: [1, 1, 1, 1]
+                radius: [16, ]
+                padding: [16, 12]
+                elevation: 2
+
+                Label:
+                    text: "这是一个圆角模块6"
+                    font_name: "fonts/pingfang-hei.ttf"
+                    color: [0, 0, 0, 1]
+                    halign: "left"
+                    valign: "middle"
+                    text_size: self.width, None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    
+    # 右上角图标按钮组 - 使用 AnchorLayout 实现右对齐
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'top'
+        padding: [0, 0, 40, 0]  # 右侧留出16dp边距
+
+        BoxLayout:
+            size_hint: None, None
+            width: "130dp"       # 总宽度根据图标+间距计算
+            height: "38dp"
+            spacing: "1dp"       # 图标之间间距更小
+
+            MDIconButton:
+                icon: "qrcode-scan"
+                ripple_scale:0
+                on_press: app.on_scan()
+                user_font_size: "18sp"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 0, 1]
+
+            MDIconButton:
+                icon: "headset"
+                ripple_scale:0
+                on_press: app.on_service()
+                user_font_size: "18sp"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 0, 1]
+
+            MDIconButton:
+                icon: "cog"
+                ripple_scale:0
+                on_press: app.on_settings()
+                user_font_size: "18sp"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 0, 1]

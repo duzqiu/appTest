@@ -1,0 +1,17 @@
+#:import MDLabel kivymd.uix.label.MDLabel
+#:include kv/home.kv
+#:include kv/search.kv
+#:include kv/settings.kv
+
+BoxLayout:
+    orientation: 'vertical'
+    MDBottomNavigation:
+        # 第一个标签页
+        HomePage:
+            id: home
+        # 第二个标签页
+        SearchPage:
+            id: search
+        # 第三个标签页
+        SettingsPage:
+            id: settings
