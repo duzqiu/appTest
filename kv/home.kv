@@ -8,16 +8,53 @@
     BoxLayout:
         orientation: "vertical"
         spacing: '6dp'
-        MDTopAppBar:
-            left_action_items: [["home-variant"]]
-            right_action_items: [["bell", lambda x: print("点击了通知")]]
-            elevation: 1
-            md_bg_color: [0.678, 0.847, 0.902, 1] 
+        # 搜索框+搜索按钮 
+        MDGridLayout:
+            cols: 2  # 两列布局：一列放搜索框，一列放消息按钮
+            spacing: "10dp"  # 两列之间的间距
+            padding: "10dp"
+            size_hint_y: None
+            height: "60dp"  # 根据需要调整高度
+
+            # 第一列：搜索框区域
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_x: None
+                width: "300dp"  # 搜索框宽度，可自定义
+                md_bg_color: [0.95, 0.95, 0.95, 1]
+                radius: [12, ]
+
+                MDIconButton:
+                    icon: "magnify"
+                    theme_text_color: "Custom"
+                    text_color: [0, 0, 0, 0.6]
+                    ripple_scale: 0
+
+                TextInput:
+                    id: search_input
+                    hint_text: "请输入搜索内容..."
+                    multiline: False
+                    size_hint_x: 1
+                    background_color: [0, 0, 0, 0]
+                    foreground_color: [0, 0, 0, 1]
+                    font_size: "16sp"
+                    padding: [10, (self.height - self.line_height) / 2, 10, 0]
+
+            # 第二列：消息按钮区域
+            MDIconButton:
+                icon: "bell-outline"
+                theme_text_color: "Custom"
+                text_color: [0, 0, 0, 0.8]
+                size_hint: None, None
+                width: "48dp"
+                height: "48dp"
+                pos_hint: {"center_y": 0.5}
         # Banner 区域
         BoxLayout:
             orientation: "vertical"
-            height: "200dp"         # 设置固定高度
+            height: "180dp"         # 设置固定高度
             size_hint_y: None       # 禁用比例高度  
+            padding: [10, 0, 10, 20] # 左右两侧流出间距（左、上、右、下），根据需要调整上下间距
             # 轮播图区域
             Carousel:
                 id: carousel         
@@ -50,7 +87,7 @@
                 # 创建多个等高的区域
                 GridLayout:
                     cols: 1
-                    spacing: '2dp'
+                    spacing: '12dp'
                     size_hint_y: None
                     height: self.minimum_height
                     # 主内容区域
@@ -70,26 +107,306 @@
                         # 右侧区域
                         BoxLayout:
                             orientation: 'vertical'
-                            size_hint_x: 0.65                         
+                            size_hint_x: 0.65                              
                             # 上侧区域
                             BoxLayout:
                                 orientation: "vertical"
-                                size_hint_y: 0.7  
-                                spacing: ['5dp', '10dp']                          
+                                size_hint_y: 0.7   
+                                spacing: '8dp'
+                                padding: [40, 0, 10, 0]  # 左、顶、右、底的内边距   
+                                Label:
+                                    text:"这是一个标题这是一个标题这是一个标题这是一个标题"    
+                                    font_size: '16sp'
+                                    color: 0, 0, 0, 1 # 黑色文字    
+                                    halign: "left"    # 水平左对齐
+                                    text_size: self.width, None   # 必须设置，halign 才会生效
+                                    height: self.texture_size[1]  # 根据文本内容调整高度 
+                                    valign: 'top'
+                                    max_lines: 1  # 最大显示行  
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'） 
                                 Label:
                                     text: "要在 BoxLayout 中添加一个文本，你可以使用 Kivy 的 Label 组件。Label 组件允许你在 UI 中显示文本，并且可以通过设置不同的属性来自定义文本的外观，例如字体大小、颜色等"
-                                    font_size: '16sp'
-                                    color: 0, 0, 0, 1  # 黑色文字
-                                    size_hint_y: None
-                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    font_size: '14sp'
+                                    color: 0, 0, 0, 0.8  # 黑色文字
+                                    height: self.font_size * 3
                                     text_size: self.width, None  # 设置宽度，允许自动换行
-                                    valign: 'top'
-                                    max_lines: 3  # 最大显示3行
-                                    # shorten: True  # 当文本超出范围时，自动缩短文本并在末尾添加省略号
-                                    
+                                    max_lines: 3 # 最大显示3行  
+                                    size_hint_y: None 
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'）       
                             # 下侧区域
                             BoxLayout:
+                                orientation: "horizontal"
                                 size_hint_y: 0.3
-                                Button:
-                                    text: '右下区域'
-                                    size_hint: 1, 1  
+                                padding: [-20, 0, 10, 0]  # 左、顶、右、底的内边距  
+                                Label:
+                                    text: "2020-09-10"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                                Label:
+                                    text: "第一作者"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                    # 主内容区域
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: '100dp'                        
+                        # 左侧区域
+                        BoxLayout:
+                            size_hint_x: 0.35
+                            Image:
+                                source: "image/banner.png"  # 替换为你的图片路径
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint: 1, 1  # 图片大小与BoxLayout相同
+                                                           
+                        # 右侧区域
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_x: 0.65                              
+                            # 上侧区域
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_y: 0.7   
+                                spacing: '8dp'
+                                padding: [40, 0, 10, 0]  # 左、顶、右、底的内边距   
+                                Label:
+                                    text:"这是一个标题这是一个标题这是一个标题这是一个标题"    
+                                    font_size: '16sp'
+                                    color: 0, 0, 0, 1 # 黑色文字    
+                                    halign: "left"    # 水平左对齐
+                                    text_size: self.width, None   # 必须设置，halign 才会生效
+                                    height: self.texture_size[1]  # 根据文本内容调整高度 
+                                    valign: 'top'
+                                    max_lines: 1  # 最大显示行  
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'） 
+                                Label:
+                                    text: "要在 BoxLayout 中添加一个文本，你可以使用 Kivy 的 Label 组件。Label 组件允许你在 UI 中显示文本，并且可以通过设置不同的属性来自定义文本的外观，例如字体大小、颜色等"
+                                    font_size: '14sp'
+                                    color: 0, 0, 0, 0.8  # 黑色文字
+                                    height: self.font_size * 3
+                                    text_size: self.width, None  # 设置宽度，允许自动换行
+                                    max_lines: 3 # 最大显示3行  
+                                    size_hint_y: None 
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'）       
+                            # 下侧区域
+                            BoxLayout:
+                                orientation: "horizontal"
+                                size_hint_y: 0.3
+                                padding: [-20, 0, 10, 0]  # 左、顶、右、底的内边距  
+                                Label:
+                                    text: "2020-09-10"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                                Label:
+                                    text: "第一作者"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                    # 主内容区域
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: '100dp'                        
+                        # 左侧区域
+                        BoxLayout:
+                            size_hint_x: 0.35
+                            Image:
+                                source: "image/banner.png"  # 替换为你的图片路径
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint: 1, 1  # 图片大小与BoxLayout相同
+                                                           
+                        # 右侧区域
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_x: 0.65                              
+                            # 上侧区域
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_y: 0.7   
+                                spacing: '8dp'
+                                padding: [40, 0, 10, 0]  # 左、顶、右、底的内边距   
+                                Label:
+                                    text:"这是一个标题这是一个标题这是一个标题这是一个标题"    
+                                    font_size: '16sp'
+                                    color: 0, 0, 0, 1 # 黑色文字    
+                                    halign: "left"    # 水平左对齐
+                                    text_size: self.width, None   # 必须设置，halign 才会生效
+                                    height: self.texture_size[1]  # 根据文本内容调整高度 
+                                    valign: 'top'
+                                    max_lines: 1  # 最大显示行  
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'） 
+                                Label:
+                                    text: "要在 BoxLayout 中添加一个文本，你可以使用 Kivy 的 Label 组件。Label 组件允许你在 UI 中显示文本，并且可以通过设置不同的属性来自定义文本的外观，例如字体大小、颜色等"
+                                    font_size: '14sp'
+                                    color: 0, 0, 0, 0.8  # 黑色文字
+                                    height: self.font_size * 3
+                                    text_size: self.width, None  # 设置宽度，允许自动换行
+                                    max_lines: 3 # 最大显示3行  
+                                    size_hint_y: None 
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'）       
+                            # 下侧区域
+                            BoxLayout:
+                                orientation: "horizontal"
+                                size_hint_y: 0.3
+                                padding: [-20, 0, 10, 0]  # 左、顶、右、底的内边距  
+                                Label:
+                                    text: "2020-09-10"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                                Label:
+                                    text: "第一作者"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                    # 主内容区域
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: '100dp'                        
+                        # 左侧区域
+                        BoxLayout:
+                            size_hint_x: 0.35
+                            Image:
+                                source: "image/banner.png"  # 替换为你的图片路径
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint: 1, 1  # 图片大小与BoxLayout相同
+                                                           
+                        # 右侧区域
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_x: 0.65                              
+                            # 上侧区域
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_y: 0.7   
+                                spacing: '8dp'
+                                padding: [40, 0, 10, 0]  # 左、顶、右、底的内边距   
+                                Label:
+                                    text:"这是一个标题这是一个标题这是一个标题这是一个标题"    
+                                    font_size: '16sp'
+                                    color: 0, 0, 0, 1 # 黑色文字    
+                                    halign: "left"    # 水平左对齐
+                                    text_size: self.width, None   # 必须设置，halign 才会生效
+                                    height: self.texture_size[1]  # 根据文本内容调整高度 
+                                    valign: 'top'
+                                    max_lines: 1  # 最大显示行  
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'） 
+                                Label:
+                                    text: "要在 BoxLayout 中添加一个文本，你可以使用 Kivy 的 Label 组件。Label 组件允许你在 UI 中显示文本，并且可以通过设置不同的属性来自定义文本的外观，例如字体大小、颜色等"
+                                    font_size: '14sp'
+                                    color: 0, 0, 0, 0.8  # 黑色文字
+                                    height: self.font_size * 3
+                                    text_size: self.width, None  # 设置宽度，允许自动换行
+                                    max_lines: 3 # 最大显示3行  
+                                    size_hint_y: None 
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'）       
+                            # 下侧区域
+                            BoxLayout:
+                                orientation: "horizontal"
+                                size_hint_y: 0.3
+                                padding: [-20, 0, 10, 0]  # 左、顶、右、底的内边距  
+                                Label:
+                                    text: "2020-09-10"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                                Label:
+                                    text: "第一作者"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                    # 主内容区域
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: '100dp'                        
+                        # 左侧区域
+                        BoxLayout:
+                            size_hint_x: 0.35
+                            Image:
+                                source: "image/banner.png"  # 替换为你的图片路径
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint: 1, 1  # 图片大小与BoxLayout相同
+                                                           
+                        # 右侧区域
+                        BoxLayout:
+                            orientation: 'vertical'
+                            size_hint_x: 0.65                              
+                            # 上侧区域
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_y: 0.7   
+                                spacing: '8dp'
+                                padding: [40, 0, 10, 0]  # 左、顶、右、底的内边距   
+                                Label:
+                                    text:"这是一个标题这是一个标题这是一个标题这是一个标题"    
+                                    font_size: '16sp'
+                                    color: 0, 0, 0, 1 # 黑色文字    
+                                    halign: "left"    # 水平左对齐
+                                    text_size: self.width, None   # 必须设置，halign 才会生效
+                                    height: self.texture_size[1]  # 根据文本内容调整高度 
+                                    valign: 'top'
+                                    max_lines: 1  # 最大显示行  
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'） 
+                                Label:
+                                    text: "要在 BoxLayout 中添加一个文本，你可以使用 Kivy 的 Label 组件。Label 组件允许你在 UI 中显示文本，并且可以通过设置不同的属性来自定义文本的外观，例如字体大小、颜色等"
+                                    font_size: '14sp'
+                                    color: 0, 0, 0, 0.8  # 黑色文字
+                                    height: self.font_size * 3
+                                    text_size: self.width, None  # 设置宽度，允许自动换行
+                                    max_lines: 3 # 最大显示3行  
+                                    size_hint_y: None 
+                                    shorten: True # 超出时显示省略号
+                                    shorten_from: 'right' # 从哪边开始省略（可选，默认 'right'）       
+                            # 下侧区域
+                            BoxLayout:
+                                orientation: "horizontal"
+                                size_hint_y: 0.3
+                                padding: [-20, 0, 10, 0]  # 左、顶、右、底的内边距  
+                                Label:
+                                    text: "2020-09-10"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'
+                                Label:
+                                    text: "第一作者"
+                                    font_size: '11sp'
+                                    color: 0, 0, 0, 0.5  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    valign: 'top'  
