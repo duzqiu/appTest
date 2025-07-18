@@ -1,14 +1,20 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
-from kivy.uix.image import Image
-from kivymd.uix.swiper import MDSwiper, MDSwiperItem
 from kivy.core.window import Window
 from kivy.uix.screenmanager import Screen
-
+from kivy.core.text import LabelBase
+from kivy.clock import Clock
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.properties import StringProperty, NumericProperty
 
+
 Window.size = (375, 667)
+
+# 注册字体
+LabelBase.register(name="Roboto",
+                   fn_regular="fonts/pingfang-hei.ttf",
+                   fn_bold="fonts/pingfang-hei.ttf")
+
 
 class GridItem(MDBoxLayout):
     pass
@@ -42,17 +48,8 @@ class MyGridItem(MDBoxLayout):
 class MainApp(MDApp):
     def build(self):
         self.root = Builder.load_file("kv/main.kv")
-        self.add_swiper_items()
         return self.root
-    
-    def add_swiper_items(self):
-        for i in range(3):  # 添加3个轮播项
-            swiper_item = MDSwiperItem()
-            img = Image(source=f"banner/banner_{i}.png", 
-                        allow_stretch=True,
-                        fit_mode="fill")  # 中心定位)
-            swiper_item.add_widget(img)
-            self.root.ids.home.ids.swiper.add_widget(swiper_item)
+
     def on_scan(self):
         print("点击了：扫一扫")
 

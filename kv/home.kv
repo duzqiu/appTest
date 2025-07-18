@@ -1,70 +1,47 @@
 # 第一个标签页
 <HomePage@MDBottomNavigationItem>:
-    name: 'screen1'
+    name: 'home'
     text: 'Home'
     icon: 'home'  
-    md_bg_color: [0.8, 0.8, 0.8, 1]  # 灰色背景 
+    md_bg_color: [1, 1, 1, 1]  # 背景色 
+    
     BoxLayout:
         orientation: "vertical"
-
-        # 标题栏示例
-        Label:
-            text: '标题栏'
-            size_hint_y: None
-            height: '48dp'
-            font_name: "fonts/pingfang-hei.ttf"
-            canvas.before:
-                Color:
-                    rgba: [0.9, 0.9, 0.9, 0.5]  # 背景
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-        # 分隔条
-        Widget:
-            size_hint_y: None
-            height: '2dp'  # 设置分隔条的高度
-            canvas.before:
-                Color:
-                    rgba: [0.7, 0.7, 0.7, 1]  # 深灰色
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-
+        spacing: '6dp'
+        MDTopAppBar:
+            left_action_items: [["home-variant"]]
+            right_action_items: [["bell", lambda x: print("点击了通知")]]
+            elevation: 1
+            md_bg_color: [0.678, 0.847, 0.902, 1] 
         # Banner 区域
-        MDSwiper:
-            id: swiper
-            size_hint_y: None
-            height: "150dp"
-            canvas.before:
-                # 设置背景颜色
-                Color:
-                    rgba: [1, 1, 1, 1]  # 背景色
-                RoundedRectangle:
-                    pos: self.pos
-                    size: self.size
-                    radius: [15, 15, 15, 15]
-                # 设置边框
-                Color:
-                    rgba: [0.9, 0.9, 0.9, 0.5]  # 边框颜色
-                Line:
-                    rounded_rectangle: [self.x, self.y, self.width, self.height, 15]
-                    width: 2
-        # 分隔条
-        Widget:
-            size_hint_y: None
-            height: '2dp'  # 设置分隔条的高度
-            canvas.before:
-                Color:
-                    rgba: [0.7, 0.7, 0.7, 1]  # 深灰色
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+        BoxLayout:
+            orientation: "vertical"
+            height: "200dp"         # 设置固定高度
+            size_hint_y: None       # 禁用比例高度  
+            # 轮播图区域
+            Carousel:
+                id: carousel         
+                Image: # 轮播项 1
+                    source: "banner/banner_3.png"
+                    allow_stretch: True
+                    keep_ratio: False
+                
+                Image: # 轮播项 2
+                    source: "banner/banner_4.jpg"
+                    allow_stretch: True
+                    keep_ratio: False
+                
+                Image: # 轮播项 3
+                    source: "banner/banner_5.png"
+                    allow_stretch: True
+                    keep_ratio: False
+                  # 可选：添加指示器（Dot Indicator）
+
 
         # 页面内容区域
         ScrollView:
             bar_width: "3dp"
-            bar_color: [0.7, 0.7, 0.7, 1]  # 滚动条颜色和透明度
-            
+            bar_color: [0.7, 0.7, 0.7, 1]  # 滚动条颜色和透明度  
             BoxLayout:
                 orientation: 'vertical'
                 size_hint_y: None
@@ -73,64 +50,46 @@
                 # 创建多个等高的区域
                 GridLayout:
                     cols: 1
+                    spacing: '2dp'
                     size_hint_y: None
                     height: self.minimum_height
-                    
-                    Button:
-                        text: '区域 1'
-                        font_name: "fonts/pingfang-hei.ttf"
-                        size_hint_y: None
-                        height: '100dp'  # 固定高度
-                        background_color: [0.9, 0.9, 0.9, 1]
-                    Button:
-                        text: '区域 2'
-                        font_name: "fonts/pingfang-hei.ttf"
-                        size_hint_y: None
-                        height: '100dp'  # 固定高度
-                        background_color: [0.8, 0.8, 0.8, 1]
-                    Button:
-                        text: '区域 3'
-                        font_name: "fonts/pingfang-hei.ttf"
-                        size_hint_y: None
-                        height: '100dp'  # 固定高度
-                        background_color: [0.7, 0.7, 0.7, 1]
-                    Button:
-                        text: '区域 4'
-                        font_name: "fonts/pingfang-hei.ttf"
-                        size_hint_y: None
-                        height: '100dp'  # 固定高度
-                        background_color: [0.6, 0.6, 0.6, 1]
                     # 主内容区域
                     BoxLayout:
                         orientation: 'horizontal'
                         size_hint_y: None
-                        height: '100dp' 
-                        
+                        height: '100dp'                        
                         # 左侧区域
                         BoxLayout:
-                            size_hint_x: 0.3
-                            Button:
-                                text: '左侧区域'
-                                font_name: "fonts/pingfang-hei.ttf"
-                                size_hint_y: 1
-                                
+                            size_hint_x: 0.35
+                            Image:
+                                source: "image/banner.png"  # 替换为你的图片路径
+                                allow_stretch: True
+                                keep_ratio: False
+                                size_hint: 1, 1  # 图片大小与BoxLayout相同
+                                                           
                         # 右侧区域
                         BoxLayout:
                             orientation: 'vertical'
-                            size_hint_x: 0.7
-                            
+                            size_hint_x: 0.65                         
                             # 上侧区域
                             BoxLayout:
-                                size_hint_y: 0.7
-                                Button:
-                                    text: '右上区域'
-                                    font_name: "fonts/pingfang-hei.ttf"
-                                    size_hint: 1, 1
+                                orientation: "vertical"
+                                size_hint_y: 0.7  
+                                spacing: ['5dp', '10dp']                          
+                                Label:
+                                    text: "要在 BoxLayout 中添加一个文本，你可以使用 Kivy 的 Label 组件。Label 组件允许你在 UI 中显示文本，并且可以通过设置不同的属性来自定义文本的外观，例如字体大小、颜色等"
+                                    font_size: '16sp'
+                                    color: 0, 0, 0, 1  # 黑色文字
+                                    size_hint_y: None
+                                    height: self.texture_size[1]  # 根据文本内容调整高度
+                                    text_size: self.width, None  # 设置宽度，允许自动换行
+                                    valign: 'top'
+                                    max_lines: 3  # 最大显示3行
+                                    # shorten: True  # 当文本超出范围时，自动缩短文本并在末尾添加省略号
                                     
                             # 下侧区域
                             BoxLayout:
                                 size_hint_y: 0.3
                                 Button:
                                     text: '右下区域'
-                                    font_name: "fonts/pingfang-hei.ttf"
                                     size_hint: 1, 1  
